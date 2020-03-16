@@ -1,0 +1,19 @@
+apiVersion: git.gitops.slipway.org/v1
+kind: GitRepo
+metadata:
+  name: gitrepo-sample
+spec:
+  uri: "git@github.com:slipway-gitops/slipway-examples.git"
+  security: "secret ref?"
+  operations:
+    - operation: test
+      path: "git@github.com:slipway-gitops/slipway-examples.git//kustomize/base"
+      weight: 3
+      optype: branch
+      reference: m[a-z]+r
+      transformers:
+        - type: annotations
+          value: branch
+          key: branch-name
+        - type: namespace
+          value: branch
